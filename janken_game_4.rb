@@ -10,10 +10,10 @@ class Player
   }
   HANDS = ["パー","チョキ","グー"]
 
-  def initialize(msg)
+  def initialize(name)
     @point = 0
     @choice = nil
-    @message = msg
+    @name = name
   end
 
   def victory?
@@ -24,7 +24,7 @@ class Player
     while !self.victory? && !other.victory?
       decide_human()
       other.decide_computer()
-      puts "You #{HANDS[choice]}, COM #{HANDS[other.choice]}"
+      puts "#{self.name} #{HANDS[choice]}, #{other.name} #{HANDS[other.choice]}"
       judge(other)
       other.judge(self)
     end
@@ -32,7 +32,7 @@ class Player
 
   def victory_speech
     if victory?
-      puts @message
+      puts "#{self.name} win!"
     end
   end
 
@@ -47,7 +47,7 @@ class Player
     @choice = rand(3)
   end
 
-  attr_reader :choice
+  attr_reader :choice, :name
 
   def judge(other)
     if WIN[[choice, other.choice]]
@@ -56,8 +56,8 @@ class Player
   end
 end
 
-computer = Player.new("You Lose")
-player = Player.new("You WIN")
+computer = Player.new("COM")
+player = Player.new("YOU")
 player.fight(computer)
 computer.victory_speech()
 player.victory_speech()
