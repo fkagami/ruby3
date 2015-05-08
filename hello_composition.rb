@@ -16,7 +16,7 @@ end
 
 class JapaneseHello
   def create_message()
-    "KOnichiwa"
+    "Konichiwa"
   end
 end
 
